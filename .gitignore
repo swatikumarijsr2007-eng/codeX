@@ -10,3 +10,5 @@ frontend/.env
 backend/prisma/dev.db
 backend/prisma/*.db
 *.log
+.env.*
+!.env.example
