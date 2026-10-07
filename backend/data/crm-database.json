@@ -1,0 +1,450 @@
+{
+  "leads": [
+    {
+      "id": "L-1024",
+      "name": "Sophia Nguyen",
+      "company": "Northstar Labs",
+      "phone": "+1 (415) 234-7715",
+      "email": "sophia@northstarlabs.ai",
+      "source": "Website",
+      "status": "Qualified",
+      "executive": "Alicia James",
+      "created": "2026-10-01",
+      "value": 24000,
+      "notes": "Looking to migrate 45 seats from legacy HubSpot."
+    },
+    {
+      "id": "L-1031",
+      "name": "Daniel Rios",
+      "company": "BluePeak Fintech",
+      "phone": "+1 (332) 447-9010",
+      "email": "daniel@bluepeak.io",
+      "source": "Referral",
+      "status": "Proposal",
+      "executive": "Marcus Lee",
+      "created": "2026-10-03",
+      "value": 18500,
+      "notes": "Sent security compliance checklist; awaiting VP signoff."
+    },
+    {
+      "id": "L-1042",
+      "name": "Priya Shah",
+      "company": "Summit Works",
+      "phone": "+44 20 7946 0219",
+      "email": "priya@summitworks.co",
+      "source": "Outbound",
+      "status": "Contacted",
+      "executive": "Alicia James",
+      "created": "2026-10-04",
+      "value": 31000,
+      "notes": "Discovery call completed. Interested in automated pipeline triggers."
+    },
+    {
+      "id": "L-1049",
+      "name": "Ethan Brooks",
+      "company": "Ora Systems",
+      "phone": "+1 (646) 888-2201",
+      "email": "ethan@orasystems.com",
+      "source": "Event",
+      "status": "Converted",
+      "executive": "Nina Patel",
+      "created": "2026-09-27",
+      "value": 14800,
+      "notes": "Signed 12-month enterprise tier during TechWeek summit."
+    },
+    {
+      "id": "L-1055",
+      "name": "Elena Rostova",
+      "company": "Crestline Bio",
+      "phone": "+1 (650) 412-8890",
+      "email": "elena@crestlinebio.com",
+      "source": "LinkedIn",
+      "status": "New",
+      "executive": "Marcus Lee",
+      "created": "2026-10-05",
+      "value": 42000,
+      "notes": "Enterprise inbound for 80-member clinical operations team."
+    }
+  ],
+  "contacts": [
+    {
+      "id": "C-201",
+      "name": "Sophia Nguyen",
+      "company": "Northstar Labs",
+      "email": "sophia@northstarlabs.ai",
+      "phone": "+1 (415) 234-7715",
+      "position": "VP of Operations",
+      "status": "Active",
+      "employee": "Alicia James",
+      "location": "San Francisco, CA"
+    },
+    {
+      "id": "C-205",
+      "name": "Daniel Rios",
+      "company": "BluePeak Fintech",
+      "email": "daniel@bluepeak.io",
+      "phone": "+1 (332) 447-9010",
+      "position": "Head of Growth",
+      "status": "Warm",
+      "employee": "Marcus Lee",
+      "location": "New York, NY"
+    },
+    {
+      "id": "C-219",
+      "name": "Priya Shah",
+      "company": "Summit Works",
+      "email": "priya@summitworks.co",
+      "phone": "+44 20 7946 0219",
+      "position": "Chief Operating Officer",
+      "status": "Active",
+      "employee": "Alicia James",
+      "location": "London, UK"
+    },
+    {
+      "id": "C-228",
+      "name": "Ethan Brooks",
+      "company": "Ora Systems",
+      "email": "ethan@orasystems.com",
+      "phone": "+1 (646) 888-2201",
+      "position": "Director of Technology",
+      "status": "Active",
+      "employee": "Nina Patel",
+      "location": "Austin, TX"
+    }
+  ],
+  "companies": [
+    {
+      "id": "CO-1",
+      "name": "Northstar Labs",
+      "industry": "Applied AI & ML",
+      "contactPerson": "Sophia Nguyen",
+      "email": "sophia@northstarlabs.ai",
+      "phone": "+1 (415) 234-7715",
+      "opportunities": 4,
+      "status": "Active",
+      "arr": "$180,000",
+      "employees": "120-250",
+      "location": "San Francisco, CA"
+    },
+    {
+      "id": "CO-2",
+      "name": "BluePeak Fintech",
+      "industry": "Fintech & Payments",
+      "contactPerson": "Daniel Rios",
+      "email": "daniel@bluepeak.io",
+      "phone": "+1 (332) 447-9010",
+      "opportunities": 2,
+      "status": "Negotiation",
+      "arr": "$94,000",
+      "employees": "50-100",
+      "location": "New York, NY"
+    },
+    {
+      "id": "CO-3",
+      "name": "Summit Works",
+      "industry": "Strategy Consulting",
+      "contactPerson": "Priya Shah",
+      "email": "priya@summitworks.co",
+      "phone": "+44 20 7946 0219",
+      "opportunities": 3,
+      "status": "Prospect",
+      "arr": "$240,000",
+      "employees": "300-500",
+      "location": "London, UK"
+    }
+  ],
+  "deals": [
+    {
+      "id": "D-1",
+      "name": "Northstar Expansion Tier",
+      "company": "Northstar Labs",
+      "contact": "Sophia Nguyen",
+      "value": 24000,
+      "probability": 72,
+      "employee": "Alicia James",
+      "closing": "2026-11-10",
+      "stage": "Qualified"
+    },
+    {
+      "id": "D-2",
+      "name": "BluePeak Annual Renewal",
+      "company": "BluePeak Fintech",
+      "contact": "Daniel Rios",
+      "value": 18500,
+      "probability": 64,
+      "employee": "Marcus Lee",
+      "closing": "2026-11-22",
+      "stage": "Proposal"
+    },
+    {
+      "id": "D-3",
+      "name": "Summit Enterprise Integration",
+      "company": "Summit Works",
+      "contact": "Priya Shah",
+      "value": 31000,
+      "probability": 88,
+      "employee": "Nina Patel",
+      "closing": "2026-12-02",
+      "stage": "Negotiation"
+    },
+    {
+      "id": "D-4",
+      "name": "Ora Pilot Onboarding",
+      "company": "Ora Systems",
+      "contact": "Ethan Brooks",
+      "value": 14800,
+      "probability": 100,
+      "employee": "Alicia James",
+      "closing": "2026-10-20",
+      "stage": "Won"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-1",
+      "title": "Prepare custom proposal deck for Q4 rollout",
+      "customer": "Northstar Labs",
+      "owner": "Alicia James",
+      "dueDate": "2026-10-08",
+      "priority": "High",
+      "status": "In Progress",
+      "completed": false
+    },
+    {
+      "id": "T-2",
+      "title": "Follow up on MSA redlines with Legal",
+      "customer": "BluePeak Fintech",
+      "owner": "Marcus Lee",
+      "dueDate": "2026-10-09",
+      "priority": "Medium",
+      "status": "Today",
+      "completed": false
+    },
+    {
+      "id": "T-3",
+      "title": "Contract pricing approval from finance",
+      "customer": "Summit Works",
+      "owner": "Nina Patel",
+      "dueDate": "2026-10-06",
+      "priority": "High",
+      "status": "Overdue",
+      "completed": false
+    },
+    {
+      "id": "T-4",
+      "title": "Complete SSO & SAML onboarding checklist",
+      "customer": "Ora Systems",
+      "owner": "Alicia James",
+      "dueDate": "2026-10-11",
+      "priority": "Low",
+      "status": "Completed",
+      "completed": true
+    }
+  ],
+  "events": [
+    {
+      "id": "E-1",
+      "title": "Northstar Discovery & Architecture Call",
+      "date": "2026-10-09",
+      "time": "10:00 AM",
+      "type": "Call",
+      "attendees": "Sophia Nguyen, Alicia James"
+    },
+    {
+      "id": "E-2",
+      "title": "BluePeak Executive Proposal Review",
+      "date": "2026-10-12",
+      "time": "02:30 PM",
+      "type": "Meeting",
+      "attendees": "Daniel Rios, Marcus Lee"
+    },
+    {
+      "id": "E-3",
+      "title": "Summit Works Contract Follow-up",
+      "date": "2026-10-14",
+      "time": "11:15 AM",
+      "type": "Task",
+      "attendees": "Priya Shah, Nina Patel"
+    }
+  ],
+  "emailThreads": [
+    {
+      "id": "em-1",
+      "customer": "Sophia Nguyen",
+      "email": "sophia@northstarlabs.ai",
+      "subject": "Proposal follow-up and security addendum",
+      "status": "Sent",
+      "time": "25 mins ago",
+      "preview": "Hi Sophia, attached is the revised proposal and pricing tier...",
+      "messages": [
+        {
+          "id": "m1",
+          "sender": "me",
+          "text": "Hi Sophia, following up from our Tuesday demo. Here is the revised proposal with the custom volume tier included.",
+          "time": "Oct 05, 09:30 AM",
+          "status": "Delivered"
+        },
+        {
+          "id": "m2",
+          "sender": "them",
+          "text": "Thanks Alicia! We shared this with our VP of Engineering.",
+          "time": "Oct 06, 02:15 PM"
+        }
+      ]
+    }
+  ],
+  "whatsAppThreads": [
+    {
+      "id": "wa-1",
+      "customer": "Sophia Nguyen",
+      "phone": "+1 (415) 234-7715",
+      "lastMessage": "Let’s sync next Tuesday at 2 PM PST.",
+      "status": "Seen",
+      "time": "12 mins ago",
+      "messages": [
+        {
+          "id": "w1",
+          "sender": "them",
+          "text": "Hi! I’ve reviewed the slide deck. Team gave green light.",
+          "time": "11:15 AM"
+        },
+        {
+          "id": "w2",
+          "sender": "me",
+          "text": "Fantastic news Sophia! Should we lock in the final contract walk-through?",
+          "time": "11:20 AM",
+          "status": "Read"
+        }
+      ]
+    }
+  ],
+  "smsThreads": [
+    {
+      "id": "sms-1",
+      "customer": "Priya Shah",
+      "phone": "+44 20 7946 0219",
+      "lastMessage": "Reminder: 15-minute executive briefing tomorrow at 3 PM GMT.",
+      "status": "Delivered",
+      "time": "Yesterday",
+      "messages": [
+        {
+          "id": "s1",
+          "sender": "me",
+          "text": "Reminder: 15-minute executive briefing tomorrow at 3 PM GMT.",
+          "time": "Yesterday, 03:00 PM",
+          "status": "Delivered"
+        }
+      ]
+    }
+  ],
+  "callLogs": [
+    {
+      "id": "cl-1",
+      "customer": "Sophia Nguyen",
+      "phone": "+1 (415) 234-7715",
+      "direction": "Outgoing",
+      "status": "Completed",
+      "duration": "14:32",
+      "recording": "Saved",
+      "date": "Today, 11:30 AM"
+    },
+    {
+      "id": "cl-2",
+      "customer": "Daniel Rios",
+      "phone": "+1 (332) 447-9010",
+      "direction": "Incoming",
+      "status": "Completed",
+      "duration": "08:15",
+      "recording": "Saved",
+      "date": "Today, 09:15 AM"
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-1",
+      "name": "northstar-expansion-proposal-v3.pdf",
+      "customer": "Northstar Labs",
+      "type": "PDF",
+      "uploadedBy": "Alicia James",
+      "date": "2026-10-04",
+      "size": "2.4 MB"
+    },
+    {
+      "id": "doc-2",
+      "name": "bluepeak-master-services-agreement.docx",
+      "customer": "BluePeak Fintech",
+      "type": "DOCX",
+      "uploadedBy": "Marcus Lee",
+      "date": "2026-10-06",
+      "size": "840 KB"
+    }
+  ],
+  "users": [
+    {
+      "id": "u-1",
+      "name": "Sophia Sterling",
+      "email": "superadmin@codexcrm.local",
+      "role": "SUPER_ADMIN",
+      "status": "Active",
+      "lastLogin": "Just now"
+    },
+    {
+      "id": "u-2",
+      "name": "Alicia James",
+      "email": "admin@codexcrm.local",
+      "role": "ADMIN",
+      "status": "Active",
+      "lastLogin": "Today, 09:18"
+    },
+    {
+      "id": "u-3",
+      "name": "Marcus Lee",
+      "email": "manager@codexcrm.local",
+      "role": "MANAGER",
+      "status": "Active",
+      "lastLogin": "Today, 08:55"
+    },
+    {
+      "id": "u-4",
+      "name": "Nina Patel",
+      "email": "sales@codexcrm.local",
+      "role": "SALES_EXECUTIVE",
+      "status": "Active",
+      "lastLogin": "Yesterday, 18:22"
+    },
+    {
+      "id": "u-5",
+      "name": "Ethan Brooks",
+      "email": "support@codexcrm.local",
+      "role": "SUPPORT_USER",
+      "status": "Active",
+      "lastLogin": "Yesterday, 11:05"
+    }
+  ],
+  "activities": [
+    {
+      "title": "New Lead Created",
+      "detail": "Alex Morgan (Quantum AI) added to database.",
+      "time": "Just now",
+      "type": "lead",
+      "user": "Alicia James",
+      "id": "act-1791388717440"
+    },
+    {
+      "id": "act-1",
+      "title": "Deal moved to Negotiation",
+      "detail": "Summit Enterprise Integration ($31,000) reached 88% probability",
+      "time": "14 mins ago",
+      "type": "deal",
+      "user": "Nina Patel"
+    },
+    {
+      "id": "act-2",
+      "title": "New lead qualified",
+      "detail": "Sophia Nguyen from Northstar Labs ($24k potential ARR)",
+      "time": "38 mins ago",
+      "type": "lead",
+      "user": "Alicia James"
+    }
+  ]
+}

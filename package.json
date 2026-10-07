@@ -1,0 +1,17 @@
+{
+  "name": "codex-crm",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm --workspace backend run dev",
+    "dev:frontend": "npm --workspace frontend run dev",
+    "db:generate": "npm --workspace backend run prisma:generate",
+    "db:migrate": "npm --workspace backend run prisma:migrate",
+    "db:seed": "npm --workspace backend run prisma:seed",
+    "docker:up": "docker compose up --build"
+  }
+}

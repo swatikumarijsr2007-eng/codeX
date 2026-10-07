@@ -1,0 +1,395 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoleName {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  SALES_EXECUTIVE
+  SUPPORT_USER
+}
+
+enum PermissionModule {
+  USERS
+  LEADS
+  CONTACTS
+  COMPANIES
+  OPPORTUNITIES
+  TASKS
+  FOLLOW_UPS
+  NOTES
+  CALENDAR
+  DOCUMENTS
+  COMMUNICATIONS
+  DASHBOARD
+  REPORTS
+  SETTINGS
+}
+
+enum PermissionAction {
+  READ
+  CREATE
+  UPDATE
+  DELETE
+  MANAGE
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum OpportunityStage {
+  DISCOVERY
+  QUALIFICATION
+  PROPOSAL
+  NEGOTIATION
+  CLOSING
+  WON
+  LOST
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum CommunicationChannel {
+  EMAIL
+  WHATSAPP
+  SMS
+  CALL
+  NOTE
+}
+
+enum ActivityType {
+  LEAD_CREATED
+  LEAD_UPDATED
+  LEAD_MOVED
+  CONTACT_CREATED
+  OPPORTUNITY_CREATED
+  TASK_CREATED
+  TASK_UPDATED
+  NOTE_ADDED
+  DOCUMENT_UPLOADED
+  EMAIL_SENT
+  WHATSAPP_SENT
+  SMS_SENT
+  CALL_COMPLETED
+  CALL_RECORDING
+}
+
+enum CallStatus {
+  QUEUED
+  RINGING
+  IN_PROGRESS
+  COMPLETED
+  MISSED
+  FAILED
+}
+
+model Role {
+  id          String       @id @default(cuid())
+  name        RoleName     @unique
+  description String?
+  users       User[]
+  permissions Permission[] @relation("RolePermissions")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Permission {
+  id        String            @id @default(cuid())
+  module    PermissionModule
+  action    PermissionAction
+  roles     Role[]            @relation("RolePermissions")
+  createdAt DateTime          @default(now())
+
+  @@unique([module, action])
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  passwordHash  String
+  roleId        String
+  role          Role            @relation(fields: [roleId], references: [id])
+  managerId     String?
+  manager       User?           @relation("ManagerHierarchy", fields: [managerId], references: [id])
+  team          User[]          @relation("ManagerHierarchy")
+  leads         Lead[]          @relation("LeadAssignee")
+  opportunities Opportunity[]  @relation("OpportunityAssignee")
+  tasks         Task[]          @relation("TaskAssignee")
+  notes         Note[]
+  documents     Document[]      @relation("DocumentUploadedBy")
+  calendarEvents CalendarEvent[]
+  activities    Activity[]      @relation("ActivityUser")
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  communications Communication[] @relation("CommunicationCreatedBy")
+}
+
+model Company {
+  id          String       @id @default(cuid())
+  name        String
+  website     String?
+  industry    String?
+  phone       String?
+  email       String?
+  address     String?
+  city        String?
+  country     String?
+  leads       Lead[]
+  contacts    Contact[]
+  opportunities Opportunity[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Lead {
+  id             String         @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String?
+  phone          String?
+  companyName    String?
+  source         String?
+  status         LeadStatus     @default(NEW)
+  score          Int?
+  assignedToId   String?
+  assignedTo     User?          @relation("LeadAssignee", fields: [assignedToId], references: [id])
+  companyId      String?
+  company        Company?       @relation(fields: [companyId], references: [id])
+  opportunities  Opportunity[]
+  tasks          Task[]
+  followUps      FollowUp[]
+  notes          Note[]
+  communications Communication[]
+  activities     Activity[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Contact {
+  id             String         @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String?
+  phone          String?
+  title          String?
+  companyId      String?
+  company        Company?       @relation(fields: [companyId], references: [id])
+  opportunities  Opportunity[]
+  tasks          Task[]
+  notes          Note[]
+  documents      Document[]
+  communications Communication[]
+  activities     Activity[]
+  calendarEvents CalendarEvent[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Opportunity {
+  id          String            @id @default(cuid())
+  name        String
+  amount      Float?
+  stage       OpportunityStage  @default(DISCOVERY)
+  probability Int?              @default(0)
+  closeDate   DateTime?
+  assignedToId String?
+  assignedTo  User?             @relation("OpportunityAssignee", fields: [assignedToId], references: [id])
+  contactId   String?
+  contact     Contact?          @relation(fields: [contactId], references: [id])
+  companyId   String?
+  company     Company?          @relation(fields: [companyId], references: [id])
+  leadId      String?
+  lead        Lead?             @relation(fields: [leadId], references: [id])
+  tasks       Task[]
+  activities  Activity[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model Task {
+  id            String            @id @default(cuid())
+  title         String
+  description   String?
+  status        TaskStatus        @default(TODO)
+  priority      TaskPriority      @default(MEDIUM)
+  dueDate       DateTime?
+  assignedToId  String?
+  assignedTo    User?             @relation("TaskAssignee", fields: [assignedToId], references: [id])
+  leadId        String?
+  lead          Lead?             @relation(fields: [leadId], references: [id])
+  contactId     String?
+  contact       Contact?          @relation(fields: [contactId], references: [id])
+  opportunityId String?
+  opportunity   Opportunity?     @relation(fields: [opportunityId], references: [id])
+  createdById   String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+model FollowUp {
+  id          String    @id @default(cuid())
+  note        String
+  scheduledAt DateTime?
+  status      String    @default("PENDING")
+  leadId      String?
+  lead        Lead?     @relation(fields: [leadId], references: [id])
+  assignedTo  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Note {
+  id        String    @id @default(cuid())
+  content   String
+  userId    String?
+  user      User?     @relation(fields: [userId], references: [id])
+  leadId    String?
+  lead      Lead?     @relation(fields: [leadId], references: [id])
+  contactId String?
+  contact   Contact?  @relation(fields: [contactId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model CalendarEvent {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  start       DateTime
+  end         DateTime?
+  userId      String?
+  user        User?     @relation(fields: [userId], references: [id])
+  contactId   String?
+  contact     Contact?  @relation(fields: [contactId], references: [id])
+  leadId      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Document {
+  id          String    @id @default(cuid())
+  fileName    String
+  mimeType    String?
+  size        Int?
+  storageKey  String
+  bucket      String
+  uploadedById String?
+  uploadedBy  User?     @relation("DocumentUploadedBy", fields: [uploadedById], references: [id])
+  leadId      String?
+  contactId   String?
+  companyId   String?
+  contact     Contact?  @relation(fields: [contactId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Communication {
+  id          String              @id @default(cuid())
+  channel     CommunicationChannel
+  direction   String
+  subject     String?
+  body        String?
+  status      String?
+  sentAt      DateTime?
+  contactId   String?
+  contact     Contact?            @relation(fields: [contactId], references: [id])
+  leadId      String?
+  lead        Lead?               @relation(fields: [leadId], references: [id])
+  createdById String?
+  createdBy   User?               @relation("CommunicationCreatedBy", fields: [createdById], references: [id])
+  email       Email?
+  whatsapp    WhatsAppMessage?
+  sms         SMSMessage?
+  call        Call?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+model Email {
+  id            String        @id @default(cuid())
+  communicationId String       @unique
+  communication Communication @relation(fields: [communicationId], references: [id])
+  provider      String        @default("mock")
+  messageId     String?
+  fromAddress   String?
+  toAddress     String?
+  createdAt     DateTime      @default(now())
+}
+
+model WhatsAppMessage {
+  id              String        @id @default(cuid())
+  communicationId String        @unique
+  communication   Communication @relation(fields: [communicationId], references: [id])
+  provider        String        @default("mock")
+  messageId      String?
+  fromNumber     String?
+  toNumber       String?
+  createdAt      DateTime      @default(now())
+}
+
+model SMSMessage {
+  id              String        @id @default(cuid())
+  communicationId String        @unique
+  communication   Communication @relation(fields: [communicationId], references: [id])
+  provider        String        @default("mock")
+  messageId      String?
+  fromNumber     String?
+  toNumber       String?
+  createdAt      DateTime      @default(now())
+}
+
+model Call {
+  id              String        @id @default(cuid())
+  communicationId String        @unique
+  communication   Communication @relation(fields: [communicationId], references: [id])
+  provider        String        @default("mock")
+  phoneNumber     String?
+  durationSeconds Int?
+  status          CallStatus    @default(QUEUED)
+  recordingUrl    String?
+  createdAt       DateTime      @default(now())
+}
+
+model Activity {
+  id            String       @id @default(cuid())
+  type          ActivityType
+  description   String
+  entityType    String?
+  entityId      String?
+  userId        String?
+  user          User?        @relation("ActivityUser", fields: [userId], references: [id])
+  contactId     String?
+  contact       Contact?     @relation(fields: [contactId], references: [id])
+  leadId        String?
+  lead          Lead?        @relation(fields: [leadId], references: [id])
+  opportunityId String?
+  opportunity   Opportunity? @relation(fields: [opportunityId], references: [id])
+  createdAt     DateTime     @default(now())
+}

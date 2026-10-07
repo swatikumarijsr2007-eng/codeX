@@ -1,0 +1,67 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: codex-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: codex_crm
+      POSTGRES_USER: codex
+      POSTGRES_PASSWORD: codexpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  minio:
+    image: quay.io/minio/minio:RELEASE.2024-10-02T17-01-48Z
+    container_name: codex-minio
+    restart: unless-stopped
+    command: server /data --console-address :9001
+    environment:
+      MINIO_ROOT_USER: codexminio
+      MINIO_ROOT_PASSWORD: codexminio123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio-data:/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: codex-backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://codex:codexpass@postgres:5432/codex_crm?schema=public
+      JWT_SECRET: replace-with-a-secure-secret
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_ACCESS_KEY: codexminio
+      MINIO_SECRET_KEY: codexminio123
+      MINIO_BUCKET: codex-crm
+    depends_on:
+      - postgres
+      - minio
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: codex-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:4000/api
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  minio-data:
